@@ -1,7 +1,7 @@
 About r-kernelknn
 =================
 
-Home: https://CRAN.R-project.org/package=KernelKnn
+Home: https://github.com/mlampros/KernelKnn
 
 Package license: MIT
 
