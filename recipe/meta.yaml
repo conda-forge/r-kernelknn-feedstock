@@ -1,5 +1,4 @@
 {% set version = '1.0.8' %}
-
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,13 +9,13 @@ package:
 source:
   fn: KernelKnn_{{ version }}.tar.gz
   url:
-    - https://cran.r-project.org/src/contrib/KernelKnn_{{ version }}.tar.gz
-    - https://cran.r-project.org/src/contrib/Archive/KernelKnn/KernelKnn_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/KernelKnn_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/KernelKnn/KernelKnn_{{ version }}.tar.gz
   sha256: eb6de30e9fe5e75f2de76390803d9f751b39da330c4141b62bf63d9e2c483ff6
 
 build:
   merge_build_host: True  # [win]
-  number: 1
+  number: 1001
   skip: true  # [win32]
   rpaths:
     - lib/R/lib/
@@ -24,28 +23,33 @@ build:
 
 requirements:
   build:
-    - posix                # [win]
-    - {{ compiler('c') }}        # [unix]
-    - {{ compiler('m2w64_c') }}  # [win]
-    - {{ compiler('cxx') }}        # [unix]
-    - {{ compiler('m2w64_cxx') }}  # [win]
+    - {{ compiler('c') }}        # [not win]
+    - {{ compiler('cxx') }}      # [not win]
+    - {{native}}toolchain        # [win]
+    - {{posix}}filesystem        # [win]
+    - {{posix}}make
+    - {{posix}}sed               # [win]
+    - {{posix}}coreutils         # [win]
+    - {{posix}}zip               # [win]
+    - llvm-openmp                # [osx]
   host:
     - r-base
-    - r-rcpp
+    - r-rcpp >=0.12.5
     - r-rcpparmadillo
-
   run:
     - r-base
-    - r-rcpp
+    - {{native}}gcc-libs         # [win]
+    - r-rcpp >=0.12.5
     - r-rcpparmadillo
+    - llvm-openmp                # [osx]
 
 test:
   commands:
-    - $R -e "library('KernelKnn')"  # [not win]
+    - $R -e "library('KernelKnn')"           # [not win]
     - "\"%R%\" -e \"library('KernelKnn')\""  # [win]
 
 about:
-  home: https://CRAN.R-project.org/package=KernelKnn
+  home: https://github.com/mlampros/KernelKnn
   license: MIT
   summary: Extends the simple k-nearest neighbors algorithm by incorporating numerous kernel
     functions and a variety of distance metrics. The package takes advantage of 'RcppArmadillo'
@@ -54,8 +58,9 @@ about:
 
 extra:
   recipe-maintainers:
-    - cbrueffer
     - johanneskoester
     - bgruening
     - daler
     - jdblischak
+    - cbrueffer
+    - dbast
