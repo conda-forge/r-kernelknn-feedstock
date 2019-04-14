@@ -1,4 +1,4 @@
-{% set version = '1.0.8' %}
+{% set version = '1.0.9' %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -7,16 +7,14 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  fn: KernelKnn_{{ version }}.tar.gz
   url:
     - {{ cran_mirror }}/src/contrib/KernelKnn_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/KernelKnn/KernelKnn_{{ version }}.tar.gz
-  sha256: eb6de30e9fe5e75f2de76390803d9f751b39da330c4141b62bf63d9e2c483ff6
+  sha256: eeb4d95b007c25964f4ebc678492ac9449c98f398ebe31be45388792931f3af9
 
 build:
   merge_build_host: True  # [win]
-  number: 1001
-  skip: true  # [win32]
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
@@ -58,9 +56,27 @@ about:
 
 extra:
   recipe-maintainers:
-    - johanneskoester
-    - bgruening
-    - daler
-    - jdblischak
-    - cbrueffer
-    - dbast
+    - conda-forge/r
+
+# Package: KernelKnn
+# Type: Package
+# Title: Kernel k Nearest Neighbors
+# Version: 1.0.9
+# Date: 2019-04-14
+# Author: Lampros Mouselimis <mouselimislampros@gmail.com>
+# Maintainer: Lampros Mouselimis <mouselimislampros@gmail.com>
+# BugReports: https://github.com/mlampros/KernelKnn/issues
+# URL: https://github.com/mlampros/KernelKnn
+# Description: Extends the simple k-nearest neighbors algorithm by incorporating numerous kernel functions and a variety of distance metrics. The package takes advantage of 'RcppArmadillo' to speed up the calculation of distances between observations.
+# License: MIT + file LICENSE
+# LazyData: TRUE
+# Depends: R(>= 2.10.0)
+# Imports: Rcpp (>= 0.12.5)
+# LinkingTo: Rcpp, RcppArmadillo
+# Suggests: testthat, covr, knitr, rmarkdown
+# VignetteBuilder: knitr
+# RoxygenNote: 6.1.0
+# NeedsCompilation: yes
+# Packaged: 2019-04-14 06:13:13 UTC; lampros
+# Repository: CRAN
+# Date/Publication: 2019-04-14 06:42:37 UTC
