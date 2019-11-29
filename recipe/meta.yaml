@@ -1,4 +1,4 @@
-{% set version = '1.0.9' %}
+{% set version = "1.1.0" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,11 +10,11 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/KernelKnn_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/KernelKnn/KernelKnn_{{ version }}.tar.gz
-  sha256: eeb4d95b007c25964f4ebc678492ac9449c98f398ebe31be45388792931f3af9
+  sha256: 172c99d71bfd07db018053051952a22cbaa806592df7284e9f00ae82c52213f1
 
 build:
   merge_build_host: True  # [win]
-  number: 1
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
@@ -50,6 +50,7 @@ test:
 about:
   home: https://github.com/mlampros/KernelKnn
   license: MIT
+  license_file: LICENSE
   summary: Extends the simple k-nearest neighbors algorithm by incorporating numerous kernel
     functions and a variety of distance metrics. The package takes advantage of 'RcppArmadillo'
     to speed up the calculation of distances between observations.
