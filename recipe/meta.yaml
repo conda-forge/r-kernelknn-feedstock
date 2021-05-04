@@ -1,4 +1,4 @@
-{% set version = "1.1.1" %}
+{% set version = "1.1.2" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,7 +10,7 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/KernelKnn_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/KernelKnn/KernelKnn_{{ version }}.tar.gz
-  sha256: af64e1c279d382d68844f643c5987f672b8260dac2da705b480636346568371b
+  sha256: 8225228e1d319e96d5a37971b31a5c9fb2aa4a6009a8fcf8b583fe13c275f699
 
 build:
   merge_build_host: true  # [win]
